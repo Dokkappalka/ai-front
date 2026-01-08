@@ -1,0 +1,8 @@
+@reference "tailwindcss";
+
+.container {
+    @apply flex flex-col min-h-screen justify-between items-center;
+    
+    // Добавляем отступ сверху для контента, чтобы он не скрывался под fixed header
+    padding-top: 4rem;
+}

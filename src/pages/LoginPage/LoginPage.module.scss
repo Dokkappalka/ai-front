@@ -1,0 +1,37 @@
+@reference "tailwindcss";
+
+
+.container {
+    @apply min-h-screen flex items-center justify-center;
+}
+.formContainer {
+    width: 30rem;
+    padding: 2rem 0;
+    @apply shadow-lg rounded-md bg-blue-400 flex items-center justify-center flex-col text-white h-auto;
+}
+
+.input {
+    @apply w-[80%] p-2 rounded-md bg-white text-black border-none my-2;
+}
+
+.loginButton {
+    @apply w-[50%] p-2 rounded-md bg-white text-black border-none my-2 hover:bg-blue-200 duration-200;
+}
+
+.inputsContainer {
+    margin: 2rem 0;
+    @apply flex items-center justify-center flex-col w-full;
+}
+
+.form {
+    @apply w-full flex items-center justify-center flex-col;
+}
+
+.inputWrapper {
+    @apply w-full flex flex-col items-center;
+}
+
+.error {
+    @apply text-red-300 text-sm mt-1;
+    font-size: 1rem;
+}

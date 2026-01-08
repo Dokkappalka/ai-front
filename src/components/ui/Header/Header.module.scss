@@ -1,0 +1,47 @@
+@reference "tailwindcss";
+
+.container {
+    @apply h-[4rem] flex items-center justify-between bg-blue-400 w-full shadow-lg fixed top-0 left-0 right-0 z-50;
+}
+
+.buttonsContainer {
+    @apply flex items-center justify-center gap-3 ml-5 w-[10rem];
+}
+
+.button {
+    @apply px-3 py-2 border-none bg-white rounded-md hover:bg-blue-200 duration-200
+}
+
+.userContainer {
+    @apply flex items-center justify-center gap-3 mr-5 text-white w-[10rem];
+}
+
+.title {
+    @apply text-2xl font-bold text-center text-white no-underline;
+}
+
+.dropdown {
+    width: 20rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgb(161, 161, 255);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    min-width: 8rem;
+    z-index: 50;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    pointer-events: none;
+}
+
+.dropdownOpen {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.menuItem {
+    @apply w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 cursor-pointer border-none bg-transparent;
+    transition: background-color 150ms ease-in-out;
+}
