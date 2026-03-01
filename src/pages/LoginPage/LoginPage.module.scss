@@ -1,21 +1,59 @@
 @reference "tailwindcss";
 
 
+.logo {
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+.header {
+    font-size: 1.5rem
+}
+
 .container {
     @apply min-h-screen flex items-center justify-center;
 }
+
 .formContainer {
-    width: 30rem;
+    width: 35rem;
     padding: 2rem 0;
-    @apply shadow-lg rounded-md bg-blue-400 flex items-center justify-center flex-col text-white h-auto;
+    background: rgba(255, 253, 253, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    border-radius: 40px;
+    @apply flex items-center justify-center flex-col h-auto text-white mx-1;
+
+}
+
+.formContainer::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 40px;
+    background: linear-gradient(270.91deg,#fff 0.87%,rgba(255,255,255,0.3) 99.31%);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
 }
 
 .input {
-    @apply w-[80%] p-2 rounded-md bg-white text-black border-none my-2;
+    border-radius: 15px;
+    height: 2.9rem;
+    @apply w-[80%] p-2 bg-white text-black border-none my-2;
 }
 
 .loginButton {
-    @apply w-[50%] p-2 rounded-md bg-white text-black border-none my-2 hover:bg-blue-200 duration-200;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    @apply w-[50%] p-2 bg-white text-black border-none my-2 mt-0 hover:bg-gray-200 duration-200;
 }
 
 .inputsContainer {
@@ -32,6 +70,8 @@
 }
 
 .error {
-    @apply text-red-300 text-sm mt-1;
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 300;
+    @apply text-sm w-[78%];
+    font-size: 0.8rem;
 }

@@ -27,8 +27,9 @@ const LoginPage = () => {
           
     return (
         <div className={styles.container}>
+            <p className={styles.logo}>AI</p>
             <div className={styles.formContainer}>
-                <h1>Авторизация</h1>
+                <p className={styles.header}>Авторизация</p>
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                     <div className={styles.inputsContainer}>
                         <div className={styles.inputWrapper}>

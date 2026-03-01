@@ -1,47 +1,141 @@
 @reference "tailwindcss";
 
 .container {
-    @apply h-[4rem] flex items-center justify-between bg-blue-400 w-full shadow-lg fixed top-0 left-0 right-0 z-50;
+    background-color: transparent;
+    @apply h-[4rem] flex items-center justify-between w-full fixed top-0 left-0 right-0 z-50;
+}
+
+.contentContainer {
+    @apply flex items-center justify-center mr-5;
 }
 
 .buttonsContainer {
-    @apply flex items-center justify-center gap-3 ml-5 w-[10rem];
+    margin-right: 10rem;
+    gap: 5rem;
+    @apply flex items-center justify-center w-[10rem];
 }
 
 .button {
-    @apply px-3 py-2 border-none bg-white rounded-md hover:bg-blue-200 duration-200
+    font-weight: 400;
+    font-size: 1rem;
+    color: white;
+    background-color: transparent;
+    width: 10rem;
+    @apply py-2 border-none cursor-pointer
+}
+
+.buttonsContainer button + button {
+  position: relative;
+}
+
+.buttonsContainer button + button::before {
+  content: "";
+  position: absolute;
+  left: calc(-2.5rem - 0.5px);
+  top: 35%;
+  height: 40%;
+  width: 2px;
+  background: rgb(255, 255, 255);
 }
 
 .userContainer {
-    @apply flex items-center justify-center gap-3 mr-5 text-white w-[10rem];
+    position: relative;
+    @apply flex items-center text-white;
+}
+
+.userPill {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.7);
+    border-radius: 9999px;
+    padding-left: 1.5rem;
+    height: 42px;
+    gap: 0.75rem;
+}
+
+.username {
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: white;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+.menuButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-right: -1px;
+    border-radius: 50%;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    svg {
+        display: block;
+    }
 }
 
 .title {
-    @apply text-2xl font-bold text-center text-white no-underline;
+    @apply text-2xl font-bold text-center text-white no-underline ml-5;
 }
 
 .dropdown {
-    width: 20rem;
     position: absolute;
-    top: 100%;
+    top: calc(100% + 0.5rem);
     right: 0;
-    background: rgb(161, 161, 255);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    min-width: 8rem;
+    min-width: 100%;
     z-index: 50;
+    background: rgba(20, 20, 30, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
     opacity: 0;
-    transform: translateX(100px);
-    transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+    transform: translateY(-10px);
+    transform-origin: top right;
+    transition: opacity 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
 }
 
 .dropdownOpen {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     pointer-events: auto;
 }
 
 .menuItem {
-    @apply w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 cursor-pointer border-none bg-transparent;
-    transition: background-color 150ms ease-in-out;
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    letter-spacing: 0.01em;
+    transition: background-color 200ms ease, color 200ms ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+
+    &:active {
+        background: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.menuItem:not(:last-child){
+  border-bottom:1px solid rgba(255, 255, 255, 0.15);
 }

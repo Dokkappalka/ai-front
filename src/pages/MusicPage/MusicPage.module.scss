@@ -3,17 +3,77 @@
 .container {
     min-height: calc(100vh - 4rem);
     height: calc(100vh - 4rem);
-    @apply w-[100%] flex justify-between items-center p-4 bg-gray-100
+    @apply w-[100%] flex justify-between items-center p-4
+}
+
+.promptContainer, .musicContainer {
+    background: rgba(255, 253, 253, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: relative;
+    border-radius: 40px;
 }
 
 .promptContainer {
-    @apply w-[28%] h-[100%] bg-white p-4 rounded-lg shadow-md overflow-y-auto;
+    padding: 0 1.5rem;
+    @apply w-[28%] h-[100%] overflow-hidden;
 }
 
-.musicContainer {
-    overflow-y: scroll;
-    @apply w-[68%] h-[100%] bg-blue-100 p-4 rounded-md;
+.promptContainer::before, .musicContainer::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: 40px;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
 }
+
+.musicContainer::before {
+    background: linear-gradient(270.91deg,#fff 0.87%,rgba(255,255,255,0.3) 99.31%);
+}
+
+.promptContainer::before {
+    background: linear-gradient(90.91deg,#fff 0.87%,rgba(255,255,255,0.3) 99.31%);
+}
+
+
+
+.musicContainer {
+    padding: 0 1.5rem;
+    @apply w-[68%] h-[100%] overflow-hidden;
+}
+
+.innerScroll {
+    
+    @apply w-full h-full p-4 overflow-y-auto;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+        
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.4);
+    }
+}
+
 
 .form {
     @apply w-full h-full flex flex-col;

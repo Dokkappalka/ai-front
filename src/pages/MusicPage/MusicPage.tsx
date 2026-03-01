@@ -213,6 +213,7 @@ const MusicPage = () => {
     
     return <div className={styles.container}>
         <div className={styles.promptContainer}>
+            <div className={styles.innerScroll}>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
             <div className={styles.mode}>
                     <p className={styles.sectionTitle}>Выберите режим</p>
@@ -437,8 +438,10 @@ const MusicPage = () => {
                     )}
                 </div>
             </form>
+            </div>
         </div>
         <div className={styles.musicContainer}>
+            <div className={styles.innerScroll}>
             <AudioContextProvider>
                 {items.map((item: IMusicGeneration) => (
                     <div key={`${item.id}-container`}>
@@ -473,6 +476,7 @@ const MusicPage = () => {
                     </div>
                 ))}
             </AudioContextProvider>
+            </div>
         </div>
     </div>
 }

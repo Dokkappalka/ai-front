@@ -40,26 +40,28 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.buttonsContainer}>
-        <button className={styles.button} onClick={() => {
-          navigate('/chat')
-        }}>Чат</button>
-        <button className={styles.button} onClick={() => {
-          navigate('/music')
-        }}>Музыка</button>
-      </div>
       <div>
-        <Link className={styles.title} to='/'>AI Hype</Link>
+        <Link className={styles.title} to='/'>AI</Link>
       </div>
-      <div className={styles.userContainer}>
-        <p>{me?.username}</p>
-        <div className={styles.menuContainer} ref={menuRef}>
-          <button 
-            className='bg-transparent border-none'
-            onClick={toggleMenu}
-          >
-            <MenuIcon height={36} width={36} />
-          </button>
+      <div className={styles.contentContainer}>
+        <div className={styles.buttonsContainer}>
+          <button className={styles.button} onClick={() => {
+            navigate('/chat')
+          }}>Чат</button>
+          <button className={styles.button} onClick={() => {
+            navigate('/music')
+          }}>Музыка</button>
+        </div>
+        <div className={styles.userContainer} ref={menuRef}>
+          <div className={styles.userPill}>
+            <span className={styles.username}>{me?.username}</span>
+            <button 
+              className={styles.menuButton}
+              onClick={toggleMenu}
+            >
+              <MenuIcon height={42} width={42} />
+            </button>
+          </div>
           <div className={`${styles.dropdown} ${isMenuOpen ? styles.dropdownOpen : ''}`}>
             <button 
               className={styles.menuItem}

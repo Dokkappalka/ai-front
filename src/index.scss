@@ -2,10 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Vela Sans";
+  src: url("./assets/fonts/VelaSans/Static/TTF/VelaSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Vela Sans", sans-serif;
+  font-weight: 600;
 }
 
 html,
@@ -16,4 +68,7 @@ body {
 
 #root {
   max-width: 100%;
+  background: url('./assets/images/main-background.jpg') no-repeat center center;
+  background-size: cover;
 }
+
