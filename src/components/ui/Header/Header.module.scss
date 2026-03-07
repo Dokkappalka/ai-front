@@ -1,8 +1,9 @@
 @reference "tailwindcss";
 
 .container {
+    padding: 0 1rem;
     background-color: transparent;
-    @apply h-[4rem] flex items-center justify-between w-full fixed top-0 left-0 right-0 z-50;
+    @apply h-[4rem] flex items-center justify-between w-full fixed top-5 left-0 right-0 z-50;
 }
 
 .contentContainer {

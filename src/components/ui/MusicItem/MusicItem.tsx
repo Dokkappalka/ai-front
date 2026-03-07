@@ -13,9 +13,7 @@ const MusicItem = ({musicItem}: IProps) => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [isLoading, setIsLoading] = useState(false); //TODO: возможно просто выпилить из компонента, переменная работает некорректно
     
-    const backgroundColor = musicItem.status === 'processing' ? styles.orangeBackground : (musicItem.status === 'failed' ? styles.redBackground : '');
     const itemId = `${musicItem.id}-${musicItem.song_url}`;
 
     const date = new Date(musicItem.created_at).toLocaleString('ru-RU', {
@@ -43,11 +41,6 @@ const MusicItem = ({musicItem}: IProps) => {
 
         const handleLoadedMetadata = () => {
             setDuration(audio.duration);
-            setIsLoading(false);
-        };
-
-        const handleLoadedData = () => {
-            setIsLoading(false);
         };
 
         const handlePlay = () => {
@@ -71,13 +64,11 @@ const MusicItem = ({musicItem}: IProps) => {
         };
 
         const handleError = () => {
-            setIsLoading(false);
             setIsPlaying(false);
         };
 
         audio.addEventListener('timeupdate', handleTimeUpdate);
         audio.addEventListener('loadedmetadata', handleLoadedMetadata);
-        audio.addEventListener('loadeddata', handleLoadedData);
         audio.addEventListener('play', handlePlay);
         audio.addEventListener('pause', handlePause);
         audio.addEventListener('ended', handleEnded);
@@ -86,7 +77,6 @@ const MusicItem = ({musicItem}: IProps) => {
         return () => {
             audio.removeEventListener('timeupdate', handleTimeUpdate);
             audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
-            audio.removeEventListener('loadeddata', handleLoadedData);
             audio.removeEventListener('play', handlePlay);
             audio.removeEventListener('pause', handlePause);
             audio.removeEventListener('ended', handleEnded);
@@ -94,7 +84,7 @@ const MusicItem = ({musicItem}: IProps) => {
         };
     }, [itemId, playingId, setPlayingId]);
 
-    // Остановить воспроизведение, если играет другой трек
+    // Stop playback if another track starts playing
     useEffect(() => {
         const audio = audioRef.current;
         if (!audio) return;
@@ -115,9 +105,7 @@ const MusicItem = ({musicItem}: IProps) => {
             stopOtherPlayers(itemId);
             audio.play().catch((error) => {
                 console.error('Error playing audio:', error);
-                setIsLoading(false);
             });
-            setIsLoading(true);
         }
     };
 
@@ -150,9 +138,68 @@ const MusicItem = ({musicItem}: IProps) => {
     };
 
     const hasSongUrl = !!musicItem.song_url;
+    const isProcessing = musicItem.status === 'processing';
+    const isError = musicItem.status === 'failed';
 
+    // ─── Processing state ───
+    if (isProcessing) {
+        return (
+            <div className={`${styles.container} ${styles.processingContainer}`}>
+                <div className={styles.imagePlayWrapper}>
+                    {musicItem.song_image_url ? (
+                        <img src={musicItem.song_image_url} alt={musicItem.title} className={styles.image} />
+                    ) : (
+                        <div className={styles.imagePlaceholder}>
+                            <svg className={styles.placeholderIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+                            </svg>
+                        </div>
+                    )}
+                </div>
+                <div className={styles.processingContent}>
+                    <div className={styles.processingInfo}>
+                        <h3 className={styles.processingTitle}>{musicItem.title || 'Без названия'}</h3>
+                        <span className={styles.processingLabel}>
+                            <span className={styles.spinnerDot} />
+                            Генерация...
+                        </span>
+                    </div>
+                </div>
+                <span className={styles.processingDate}>{date}</span>
+            </div>
+        );
+    }
+
+    // ─── Error state ───
+    if (isError) {
+        return (
+            <div className={`${styles.container} ${styles.errorContainer}`}>
+                <div className={styles.errorIconWrapper}>
+                    <svg className={styles.errorIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="8" x2="12" y2="12" />
+                        <line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                </div>
+                <div className={styles.errorContent}>
+                    <div className={styles.errorInfo}>
+                        <h3 className={styles.errorTitle}>{musicItem.title || 'Без названия'}</h3>
+                        <span
+                            className={styles.errorMessage}
+                            title={musicItem.error_message || 'Произошла ошибка при генерации'}
+                        >
+                            {musicItem.error_message || 'Произошла ошибка при генерации'}
+                        </span>
+                    </div>
+                </div>
+                <span className={styles.errorDate}>{date}</span>
+            </div>
+        );
+    }
+
+    // ─── Success / default state ───
     return (
-        <div className={`${styles.container} ${backgroundColor}`}>
+        <div className={styles.container}>
             {hasSongUrl && musicItem.song_url && (
                 <audio
                     ref={audioRef}
@@ -160,48 +207,66 @@ const MusicItem = ({musicItem}: IProps) => {
                     preload="metadata"
                 />
             )}
-            
-            {musicItem.song_image_url && (
-                <div className={styles.imageWrapper}>
+
+            <div className={styles.imagePlayWrapper} onClick={hasSongUrl ? handlePlayPause : undefined}>
+                {musicItem.song_image_url ? (
                     <img 
                         src={musicItem.song_image_url} 
                         alt={musicItem.title}
                         className={styles.image}
                     />
-                </div>
-            )}
-            
-            <div className={styles.content}>
-                <div className={styles.header}>
-                    <div className={styles.titleSection}>
-                        <button
-                            className={styles.playButton}
-                            onClick={handlePlayPause}
-                            disabled={!hasSongUrl}
-                            aria-label={isPlaying ? 'Pause' : 'Play'}
-                        >
-                            { isPlaying ? (
-                                '⏸'
-                            ) : (
-                                '▶'
-                            )}
-                        </button>
-                        <h3 className={styles.title}>{musicItem.title || 'Без названия'}</h3>
+                ) : (
+                    <div className={styles.imagePlaceholder}>
+                        <svg className={styles.placeholderIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />
+                        </svg>
                     </div>
-                    
+                )}
+                <button
+                    className={styles.playOverlay}
+                    onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
+                    disabled={!hasSongUrl}
+                    aria-label={isPlaying ? 'Pause' : 'Play'}
+                >
+                    {isPlaying ? (
+                        <svg className={styles.playIcon} viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="6" y="4" width="4" height="16" rx="1" />
+                            <rect x="14" y="4" width="4" height="16" rx="1" />
+                        </svg>
+                    ) : (
+                        <svg className={styles.playIcon} viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                    )}
+                </button>
+            </div>
+
+            <div className={styles.content}>
+                <div className={styles.topRow}>
+                    <h3 className={styles.title}>{musicItem.title || 'Без названия'}</h3>
                     {hasSongUrl && (
-                        <button
-                            className={styles.downloadButton}
-                            onClick={handleDownload}
-                            aria-label="Download"
-                        >
-                            ⬇
-                        </button>
+                        <>
+                            <span className={styles.timeInfo}>
+                                {formatTime(currentTime)}/{formatTime(duration)}
+                            </span>
+                            <button
+                                className={styles.downloadButton}
+                                onClick={handleDownload}
+                                aria-label="Download"
+                            >
+                                <svg className={styles.downloadIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                            </button>
+                        </>
                     )}
                 </div>
 
-                {hasSongUrl && (
-                    <div className={styles.progressSection}>
+                <div className={styles.bottomRow}>
+                    <span className={styles.date}>{date}</span>
+                    {hasSongUrl && (
                         <input
                             type="range"
                             min="0"
@@ -211,15 +276,8 @@ const MusicItem = ({musicItem}: IProps) => {
                             className={styles.progressBar}
                             disabled={!duration}
                         />
-                        <div className={styles.timeInfo}>
-                            <span>{formatTime(currentTime)}</span>
-                            <span>/</span>
-                            <span>{formatTime(duration)}</span>
-                        </div>
-                    </div>
-                )}
-
-                <div className={styles.date}>{date}</div>
+                    )}
+                </div>
             </div>
         </div>
     );

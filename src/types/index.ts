@@ -65,4 +65,5 @@ export interface IMusicItem {
   song_tags?: string;
   song_model_name?: string;
   status: string;
+  error_message?: string | null;
 }

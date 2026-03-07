@@ -218,6 +218,7 @@ const MusicPage = () => {
             <div className={styles.mode}>
                     <p className={styles.sectionTitle}>Выберите режим</p>
                 <div className={styles.modeButtons}>
+                        <div className={`${styles.modeSlider} ${customMode ? styles.modeSliderRight : ''}`} />
                         <button 
                             type="button"
                             className={`${styles.modeButton} ${!customMode ? styles.modeButtonActive : ''}`} 
@@ -457,7 +458,8 @@ const MusicPage = () => {
                             song_image_url: item.song_1_image_url,
                             song_duration: item.song_1_duration,
                             song_tags: item.song_1_tags,
-                            song_model_name: item.song_1_model_name
+                            song_model_name: item.song_1_model_name,
+                            error_message: item.error_message
                         }}/>
                         <MusicItem key={`${item.id}-song2`} musicItem={{
                             id: item.id, 
@@ -471,7 +473,8 @@ const MusicPage = () => {
                             song_image_url: item.song_2_image_url,
                             song_duration: item.song_2_duration,
                             song_tags: item.song_2_tags,
-                            song_model_name: item.song_2_model_name
+                            song_model_name: item.song_2_model_name,
+                            error_message: item.error_message
                         }}/>
                     </div>
                 ))}
