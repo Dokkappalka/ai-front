@@ -1,0 +1,73 @@
+@reference "tailwindcss";
+
+.container {
+    @apply w-full h-full p-4 flex flex-col gap-4;
+}
+
+.newChatButton {
+    @apply w-full flex items-center justify-center gap-2 py-3 px-4 rounded-[20px] text-white font-medium cursor-pointer transition-all;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .plusIcon {
+        font-size: 1.25rem;
+        line-height: 1;
+    }
+}
+
+.listContainer {
+    @apply flex flex-col gap-2 overflow-y-auto pr-1;
+    
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.loadingText {
+    @apply text-white/50 text-sm text-center py-4;
+}
+
+.chatItem {
+    @apply p-3 rounded-[16px] cursor-pointer transition-all flex flex-col gap-1.5;
+    background: transparent;
+    border: 1px solid transparent;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+}
+
+.chatItemActive {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.chatHeader {
+    @apply flex items-center justify-between gap-2;
+}
+
+.chatTitle {
+    @apply text-white font-medium text-[0.95rem] truncate;
+}
+
+.chatTime {
+    @apply text-white/40 text-[0.75rem] whitespace-nowrap;
+}
+
+.chatPreview {
+    @apply text-white/60 text-[0.8rem] line-clamp-2 leading-snug;
+}
+
+.modelBadge {
+    @apply self-start text-[0.7rem] px-2 py-0.5 rounded-full mt-1 text-white/50 border border-white/10;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.loadMoreButton {
+    @apply w-full py-2 text-white/50 text-[0.85rem] hover:text-white transition-colors cursor-pointer;
+}

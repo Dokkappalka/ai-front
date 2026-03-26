@@ -67,3 +67,50 @@ export interface IMusicItem {
   status: string;
   error_message?: string | null;
 }
+
+export interface IModel {
+  id: string;
+  name: string;
+  provider: string;
+  description: string;
+  context_length?: number;
+  pricing?: any;
+  supports_vision?: boolean;
+  is_default?: boolean;
+}
+export interface IAttachment {
+  id?: number;
+  url: string;
+  type?: string;
+  name?: string;
+  size?: number;
+  file_type?: string;
+  mime_type?: string;
+  original_filename?: string;
+  file_size?: number;
+}
+export interface IConversation {
+  id: number;
+  title: string;
+  model: string;
+  system_prompt: string | null;
+  temperature: number;
+  max_tokens: number;
+  is_archived: boolean;
+  message_count: number;
+  last_message: Pick<IMessage, 'id' | 'role' | 'content' | 'created_at'> | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IMessage {
+  id: number;
+  conversation: number;
+  role: 'user' | 'assistant';
+  content: string;
+  model: string | null;
+  tokens_used: number | null;
+  created_at: string;
+  updated_at: string;
+  attachments?: IAttachment[];
+}

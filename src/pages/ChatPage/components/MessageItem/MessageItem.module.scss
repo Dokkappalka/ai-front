@@ -1,0 +1,134 @@
+@reference "tailwindcss";
+
+.container {
+    @apply flex w-full mb-4 px-4;
+}
+
+.containerUser {
+    @apply justify-end;
+}
+
+.containerAssistant {
+    @apply justify-start;
+}
+
+.bubble {
+    @apply max-w-[85%] rounded-[24px] px-5 py-3 flex flex-col gap-1;
+}
+
+.bubbleUser {
+    @apply rounded-tr-[4px];
+    background: #e2e2d8;
+    color: #21211a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    
+    .time {
+        color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.bubbleAssistant {
+    @apply rounded-tl-[4px];
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    
+    .time {
+        color: rgba(255, 255, 255, 0.3);
+    }
+}
+
+.attachmentsContainer {
+    @apply flex flex-wrap gap-2 mb-3;
+}
+
+.attachmentItem {
+    @apply relative overflow-hidden rounded-lg bg-black/5 border border-black/10;
+    max-width: 250px;
+    
+    .bubbleAssistant & {
+        @apply bg-white/5 border-white/10;
+    }
+}
+
+.attachmentImage {
+    @apply w-full h-auto max-h-[250px] object-contain block transition-transform hover:scale-105;
+}
+
+.attachmentFile {
+    @apply flex items-center gap-2 p-3 text-sm no-underline transition-colors;
+    color: inherit;
+    
+    &:hover {
+        @apply bg-black/10;
+    }
+    
+    .bubbleAssistant &:hover {
+        @apply bg-white/10;
+    }
+}
+
+.fileIcon {
+    @apply text-2xl;
+}
+
+.fileName {
+    @apply font-medium truncate;
+    max-width: 180px;
+}
+
+.content {
+    @apply text-[0.95rem] leading-[1.6];
+    
+    p {
+        margin-bottom: 0.75em;
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul, ol {
+        margin-bottom: 0.75em;
+        padding-left: 1.5em;
+    }
+
+    ul { list-style-type: disc; }
+    ol { list-style-type: decimal; }
+    
+    li { margin-bottom: 0.25em; }
+
+    a {
+        @apply underline opacity-80 hover:opacity-100 transition-opacity;
+    }
+
+    img {
+        @apply max-w-full h-auto rounded-lg my-2 block;
+        max-height: 400px;
+        object-fit: contain;
+    }
+}
+
+.meta {
+    @apply flex items-center justify-end gap-2 mt-1;
+}
+
+.time {
+    @apply text-[0.7rem];
+}
+
+.modelName {
+    @apply text-[0.65rem] opacity-50 uppercase tracking-wide mr-auto;
+}
+
+.inlineCode {
+    @apply bg-black/30 rounded px-1.5 py-0.5 text-[0.85em] font-mono;
+}
+
+.codeWrapper {
+    @apply rounded-lg overflow-hidden my-3 border border-white/10;
+    
+    .codeHeader {
+        @apply bg-[#1e1e1e] text-white/50 text-xs px-4 py-1.5 font-mono border-b border-white/5;
+    }
+}

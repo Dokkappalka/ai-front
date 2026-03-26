@@ -4,6 +4,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import Layout from '../components/Layout/Layout';
 import MusicPage from '../pages/MusicPage/MusicPage.tsx';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import ChatPage from '../pages/ChatPage/ChatPage';
 import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import { PublicRoute } from '../components/auth/PublicRoute';
 
@@ -36,7 +37,11 @@ export const router = createBrowserRouter([
       },
       {
         path: 'chat',
-        element: <></>
+        element: <ChatPage/>
+      },
+      {
+        path: 'chat/:id',
+        element: <ChatPage/>
       }
     ],
   },

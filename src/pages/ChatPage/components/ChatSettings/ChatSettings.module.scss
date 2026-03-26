@@ -1,0 +1,85 @@
+@reference "tailwindcss";
+
+.overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.modal {
+    @apply w-full max-w-lg rounded-[24px] p-6 flex flex-col gap-5;
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+    @apply flex items-center justify-between;
+    
+    h2 {
+        @apply text-xl font-bold text-white m-0;
+    }
+}
+
+.closeBtn {
+    @apply text-white/50 hover:text-white text-2xl font-light cursor-pointer transition-colors bg-transparent border-none;
+}
+
+.content {
+    @apply flex flex-col gap-4;
+}
+
+.field {
+    @apply flex flex-col gap-1.5 w-full;
+    
+    label {
+        @apply text-sm text-white/70 font-medium;
+    }
+
+    input[type="text"], input[type="number"], select, textarea {
+        @apply w-full bg-black/30 border border-white/10 rounded-[12px] px-3 py-2 text-white text-[0.95rem] outline-none transition-all;
+        
+        &:focus {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.4);
+        }
+    }
+    
+    textarea {
+        resize: none;
+    }
+
+    input[type="range"] {
+        @apply w-full mt-2;
+        accent-color: white;
+    }
+}
+
+.row {
+    @apply flex items-center gap-4;
+}
+
+.actions {
+    @apply flex items-center justify-end gap-3 mt-2;
+}
+
+.saveBtn, .secondaryBtn, .dangerBtn {
+    @apply px-4 py-2 rounded-[12px] font-medium text-sm transition-all cursor-pointer border-none;
+}
+
+.saveBtn {
+    @apply bg-white text-black hover:bg-white/90;
+    
+    &:disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}
+
+.secondaryBtn {
+    @apply bg-white/10 text-white hover:bg-white/20;
+}
+
+.dangerBtn {
+    @apply bg-red-500/20 text-red-500 hover:bg-red-500/30 mr-auto;
+}
