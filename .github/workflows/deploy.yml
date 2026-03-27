@@ -14,7 +14,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: [self-hosted, macos, mac-runner]
+    runs-on: self-hosted
     
     steps:
       - name: Checkout code
@@ -64,7 +64,7 @@ jobs:
             docker image prune -f
 
   lint:
-    runs-on: [self-hosted, macos, mac-runner]
+    runs-on: self-hosted
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
