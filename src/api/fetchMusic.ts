@@ -1,5 +1,5 @@
 import { useMainStore } from "../store/mainStore"
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import type { IMusicGeneration, PaginatedResponse } from "../types"
 import { apiClient } from "../config/api"
 

@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '../../config/api';
-import type { IMessage, IConversation } from '../../types';
+import type { IMessage } from '../../types';
 import { useMainStore } from '../../store/mainStore';
 
 export const useMessages = (conversationId: number | null) => {
