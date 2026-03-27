@@ -5,6 +5,7 @@ import './index.scss';
 import { useInitAuth } from './hooks/useInitAuth';
 import { useMainStore } from './store/mainStore';
 
+//XD
 function App() {
   const isLoading = useMainStore(state => state.isLoading)
   useInitAuth()
