@@ -27,6 +27,7 @@ jobs:
         with:
           context: ./
           push: true
+          provenance: false
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:latest
