@@ -35,8 +35,6 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:latest
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/ai-hype-frontend:buildcache,mode=max
           
       - name: Setup SSH Key
         if: github.ref == 'refs/heads/production'
