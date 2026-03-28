@@ -18,6 +18,7 @@ RUN npm run build
 # Production stage
 FROM nginx:alpine
 
+ARG BUILD_DATE=1
 # Copy custom nginx config
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
