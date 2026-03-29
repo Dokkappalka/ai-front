@@ -64,7 +64,7 @@ jobs:
       - name: Copy nginx.conf to server
         if: github.ref == 'refs/heads/production'
         run: |
-          scp -i ~/.ssh/deploy_key frontend/ai-hype/nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/ai-hype/nginx.conf
+          scp -i ~/.ssh/deploy_key nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/opt/ai-hype/nginx.conf
 
       - name: Restart nginx
         if: github.ref == 'refs/heads/production'
