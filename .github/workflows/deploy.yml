@@ -69,7 +69,7 @@ jobs:
       - name: Restart nginx
         if: github.ref == 'refs/heads/production'
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'docker exec ai-hype-frontend-1 nginx -s reload'
+          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'docker exec ai-hype-frontend_1 nginx -s reload'
           
       - name: Cleanup SSH Key
         if: always()
