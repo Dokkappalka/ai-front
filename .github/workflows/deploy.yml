@@ -53,7 +53,7 @@ jobs:
             export BACKEND_VERSION=$(cat backend_version.txt 2>/dev/null || echo "latest")
             echo "${GITHUB_SHA}" > frontend_version.txt
             docker pull ${DOCKERHUB_USERNAME}/ai-hype-frontend:${GITHUB_SHA}
-            docker-compose up -d frontend
+            docker compose up -d frontend
             docker image prune -f
           EOF
 
@@ -63,7 +63,7 @@ jobs:
 
       - name: Restart nginx
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'docker exec ai-hype_frontend_1 nginx -s reload'
+          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} 'docker exec ai-hype-frontend-1 nginx -s reload'
           
       - name: Cleanup SSH Key
         if: always()
