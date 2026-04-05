@@ -46,11 +46,11 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           GITHUB_SHA: ${{ github.sha }}
         run: |
-          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+          ssh -i ~/.ssh/deploy_key ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
             cd /opt/ai-hype
             export DOCKERHUB_USERNAME="${DOCKERHUB_USERNAME}"
             export FRONTEND_VERSION="${GITHUB_SHA}"
-            export BACKEND_VERSION=$(cat backend_version.txt 2>/dev/null || echo "latest")
+            export BACKEND_VERSION=\$(cat backend_version.txt 2>/dev/null || echo "latest")
             echo "${GITHUB_SHA}" > frontend_version.txt
             docker pull ${DOCKERHUB_USERNAME}/ai-hype-frontend:${GITHUB_SHA}
             docker compose up -d frontend
