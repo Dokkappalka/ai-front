@@ -444,6 +444,12 @@ const MusicPage = () => {
         <div className={styles.musicContainer}>
             <div className={styles.innerScroll}>
             <AudioContextProvider>
+                {items.length === 0 && (
+                    <div className={styles.emptyState}>
+                        <p>Здесь пока пусто</p>
+                        <p>Сочините что-нибудь — это займёт меньше минуты</p>
+                    </div>
+                )}
                 {items.map((item: IMusicGeneration) => (
                     <div key={`${item.id}-container`}>
                         <MusicItem key={`${item.id}-song1`} musicItem={{

@@ -49,6 +49,28 @@
     @apply w-[68%] h-[100%] overflow-hidden;
 }
 
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 2rem;
+
+    p:first-child {
+        font-size: 1rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    p:last-child {
+        font-size: 0.85rem;
+    }
+}
+
 .innerScroll {
     
     @apply w-full h-full p-4 overflow-y-auto;
@@ -388,6 +410,7 @@
         align-items: stretch;
         gap: 1rem;
         padding-bottom: 2rem;
+        justify-content: flex-start;
     }
 
     .promptContainer {
@@ -400,8 +423,8 @@
 
     .musicContainer {
         width: 100%;
+        flex: 1;
         height: auto;
-        min-height: 300px;
         border-radius: 20px;
         padding: 1rem 1.25rem;
         overflow: hidden;
