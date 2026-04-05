@@ -9,7 +9,30 @@
 }
 
 .settingsBtn {
+    margin-right: 1rem;
     @apply ml-auto px-4 py-1.5 rounded-full text-[0.85rem] font-medium text-white/70 hover:text-white transition-all cursor-pointer border border-white/10 hover:border-white/30 bg-white/5;
+}
+
+.mobileSidebarBtn {
+    display: none;
+    margin-left: 1rem;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    height: 2.5rem;
+    width: 2.5rem;
+    transition: background 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+    }
 }
 
 .messagesContainer {
@@ -34,4 +57,18 @@
 
 .typingIndicator {
     @apply animate-pulse;
+}
+
+@media (max-width: 1300px) {
+    .areaHeader {
+        @apply px-3 py-3;
+    }
+
+    .messagesContainer {
+        @apply px-2;
+    }
+
+    .mobileSidebarBtn {
+        display: flex;
+    }
 }

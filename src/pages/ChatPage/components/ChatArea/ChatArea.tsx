@@ -12,9 +12,10 @@ import type { IMessage, IConversation } from '../../../../types';
 interface ChatAreaProps {
     conversationId: number | null;
     isNewChat: boolean;
+    onOpenSidebar?: () => void;
 }
 
-const ChatArea = ({ conversationId, isNewChat }: ChatAreaProps) => {
+const ChatArea = ({ conversationId, isNewChat, onOpenSidebar }: ChatAreaProps) => {
     const navigate = useNavigate();
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
     
@@ -100,11 +101,19 @@ const ChatArea = ({ conversationId, isNewChat }: ChatAreaProps) => {
         <div className={styles.container}>
             {/* Header for Settings */}
             <div className={styles.areaHeader}>
-                <div className={styles.headerInfo}>
-                    {/* Title will be rendered here if needed, or just Settings btn */}
-                </div>
-                <button 
-                    className={styles.settingsBtn} 
+                <button
+                    className={styles.mobileSidebarBtn}
+                    onClick={onOpenSidebar}
+                    aria-label="Открыть историю чатов"
+                >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <button
+                    className={styles.settingsBtn}
                     onClick={() => setIsSettingsOpen(true)}
                 >
                     Настройки

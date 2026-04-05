@@ -2,8 +2,8 @@
 
 .container {
     padding: 2rem 5rem;
-    min-height: calc(100vh - 4rem);
-    height: calc(100vh - 4rem);
+    min-height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.5rem);
     @apply w-[100%] flex justify-between items-center;
 }
 
@@ -45,6 +45,22 @@
     background: linear-gradient(90.91deg,#fff 0.87%,rgba(255,255,255,0.3) 99.31%);
 }
 
+.overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 199;
+    cursor: pointer;
+    pointer-events: none;
+    transition: background 0.3s ease;
+}
+
+.overlayVisible {
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: auto;
+}
+
 .innerScroll {
     @apply w-full h-full overflow-y-auto;
     scrollbar-width: thin;
@@ -65,5 +81,46 @@
 
     &::-webkit-scrollbar-thumb:hover {
         background: rgba(255, 255, 255, 0.4);
+    }
+}
+
+@media (max-width: 1300px) {
+    .container {
+        padding: 0.5rem 0.75rem;
+        align-items: flex-start;
+        flex-direction: column;
+        height: calc(100vh - 5.5rem);
+        overflow: hidden;
+    }
+
+    .sidebarContainer {
+        position: fixed;
+        left: 0;
+        top: 1rem;
+        bottom: 1rem;
+        width: 80%;
+        max-width: 320px;
+        height: auto;
+        z-index: 200;
+        border-radius: 0 24px 24px 0;
+        overflow: hidden;
+        transform: translateX(-105%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                    box-shadow 0.35s ease;
+        box-shadow: none;
+    }
+
+    .sidebarContainer::before {
+        border-radius: 0 24px 24px 0;
+    }
+
+    .sidebarOpen {
+        transform: translateX(0);
+        box-shadow: 4px 0 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .chatContainer {
+        width: 100%;
+        height: calc(100vh - 5.5rem);
     }
 }

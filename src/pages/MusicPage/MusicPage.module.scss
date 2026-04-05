@@ -2,8 +2,8 @@
 
 .container {
     padding: 2rem 5rem;
-    min-height: calc(100vh - 4rem);
-    height: calc(100vh - 4rem);
+    min-height: calc(100vh - 5.5rem);
+    height: calc(100vh - 5.5rem);
     @apply w-[100%] flex justify-between items-center
 }
 
@@ -376,6 +376,55 @@
     gap: 1rem;
     padding: 0 0.85rem 0.85rem;
     animation: fadeIn 0.2s ease-in-out;
+}
+
+@media (max-width: 1300px) {
+    .container {
+        padding: 0.75rem;
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 5.5rem);
+        overflow-y: auto;
+        align-items: stretch;
+        gap: 1rem;
+        padding-bottom: 2rem;
+    }
+
+    .promptContainer {
+        width: 100%;
+        height: auto;
+        border-radius: 20px;
+        padding: 1rem 1.25rem;
+        overflow: hidden;
+    }
+
+    .musicContainer {
+        width: 100%;
+        height: auto;
+        min-height: 300px;
+        border-radius: 20px;
+        padding: 1rem 1.25rem;
+        overflow: hidden;
+    }
+
+    .promptContainer::before, .musicContainer::before {
+        border-radius: 20px;
+    }
+
+    .innerScroll {
+        height: auto;
+        overflow-y: visible;
+        padding: 0.5rem 0.25rem;
+    }
+
+    .form {
+        height: auto;
+    }
+
+    .generateButton {
+        padding: 1.5rem 0 0.5rem;
+        margin-top: 0;
+    }
 }
 
 @keyframes fadeIn {

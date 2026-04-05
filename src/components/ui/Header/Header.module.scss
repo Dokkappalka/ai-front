@@ -13,7 +13,7 @@
 .buttonsContainer {
     margin-right: 10rem;
     gap: 5rem;
-    @apply flex items-center justify-center w-[10rem];
+    @apply flex items-center justify-center;
 }
 
 .button {
@@ -139,4 +139,26 @@
 
 .menuItem:not(:last-child){
   border-bottom:1px solid rgba(255, 255, 255, 0.15);
+}
+
+.navItemMobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .buttonsContainer {
+        display: none;
+    }
+
+    .username {
+        display: none;
+    }
+
+    .navItemMobile {
+        display: block;
+    }
 }

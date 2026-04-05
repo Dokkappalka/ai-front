@@ -329,6 +329,26 @@
     z-index: 1;
 }
 
+@media (max-width: 768px) {
+    .container {
+        padding: 0.55rem 0.5rem;
+        gap: 0.6rem;
+    }
+
+    .bottomRow {
+        flex-wrap: wrap;
+        gap: 0.3rem 0.5rem;
+    }
+
+    .progressBar {
+        min-width: 80px;
+    }
+
+    .timeInfo {
+        font-size: 0.72rem;
+    }
+}
+
 /* ─── Error state ─── */
 .errorContainer {
     border: 1px solid rgba(220, 70, 70, 0.35);

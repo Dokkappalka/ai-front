@@ -18,9 +18,10 @@ const formatTime = (dateString: string) => {
 
 interface ChatSidebarProps {
     activeConversationId: number | null;
+    onConversationSelect?: () => void;
 }
 
-const ChatSidebar = ({ activeConversationId }: ChatSidebarProps) => {
+const ChatSidebar = ({ activeConversationId, onConversationSelect }: ChatSidebarProps) => {
     const navigate = useNavigate();
     const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useConversations();
 
@@ -28,9 +29,9 @@ const ChatSidebar = ({ activeConversationId }: ChatSidebarProps) => {
 
     return (
         <div className={styles.container}>
-            <button 
+            <button
                 className={styles.newChatButton}
-                onClick={() => navigate('/chat')}
+                onClick={() => { navigate('/chat'); onConversationSelect?.(); }}
             >
                 <span className={styles.plusIcon}>+</span>
                 Новый чат
@@ -45,7 +46,7 @@ const ChatSidebar = ({ activeConversationId }: ChatSidebarProps) => {
                         <div 
                             key={chat.id} 
                             className={`${styles.chatItem} ${isActive ? styles.chatItemActive : ''}`}
-                            onClick={() => navigate(`/chat/${chat.id}`)}
+                            onClick={() => { navigate(`/chat/${chat.id}`); onConversationSelect?.(); }}
                         >
                             <div className={styles.chatHeader}>
                                 <h3 className={styles.chatTitle}>{chat.title || 'Новый чат'}</h3>

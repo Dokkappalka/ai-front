@@ -63,7 +63,19 @@ const Header = () => {
             </button>
           </div>
           <div className={`${styles.dropdown} ${isMenuOpen ? styles.dropdownOpen : ''}`}>
-            <button 
+            <button
+              className={`${styles.menuItem} ${styles.navItemMobile}`}
+              onClick={() => { navigate('/chat'); setIsMenuOpen(false); }}
+            >
+              Чат
+            </button>
+            <button
+              className={`${styles.menuItem} ${styles.navItemMobile}`}
+              onClick={() => { navigate('/music'); setIsMenuOpen(false); }}
+            >
+              Музыка
+            </button>
+            <button
               className={styles.menuItem}
               onClick={handleLogout}
             >

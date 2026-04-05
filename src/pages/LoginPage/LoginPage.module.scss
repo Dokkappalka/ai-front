@@ -18,7 +18,7 @@
 }
 
 .formContainer {
-    width: 35rem;
+    width: min(35rem, calc(100% - 1.5rem));
     padding: 2rem 0;
     background: rgba(255, 253, 253, 0.1);
     backdrop-filter: blur(12px);
@@ -74,4 +74,19 @@
     font-weight: 300;
     @apply text-sm w-[78%];
     font-size: 0.8rem;
+}
+
+@media (max-width: 480px) {
+    .input {
+        @apply w-[90%];
+    }
+
+    .loginButton {
+        @apply w-[80%];
+    }
+
+    .formContainer {
+        padding: 2rem 0.75rem;
+        border-radius: 24px;
+    }
 }
