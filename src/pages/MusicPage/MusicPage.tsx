@@ -1,5 +1,6 @@
 import { useMusic } from '../../api/fetchMusic';
 import { useCreateMusic } from '../../api/fetchCreateMusic';
+import { useDeleteMusic } from '../../api/fetchDeleteMusic';
 import styles from './MusicPage.module.scss'
 import type { IMusicGeneration } from "../../types"
 import MusicItem from '../../components/ui/MusicItem/MusicItem';
@@ -193,9 +194,25 @@ const MusicPage = () => {
     const titleLimit = getTitleLimit(model);
 
     const createMusicMutation = useCreateMusic();
+    const deleteMusicMutation = useDeleteMusic();
+    const [confirmingDeleteId, setConfirmingDeleteId] = useState<number | null>(null);
 
     const onSubmit = (data: MusicGenerationFormData) => {
         createMusicMutation.mutate(data);
+    };
+
+    const handleDeleteClick = (id: number) => {
+        setConfirmingDeleteId(id);
+    };
+
+    const handleDeleteConfirm = (id: number) => {
+        deleteMusicMutation.mutate(id, {
+            onSuccess: () => setConfirmingDeleteId(null),
+        });
+    };
+
+    const handleDeleteCancel = () => {
+        setConfirmingDeleteId(null);
     };
 
     const {
@@ -451,14 +468,49 @@ const MusicPage = () => {
                     </div>
                 )}
                 {items.map((item: IMusicGeneration) => (
-                    <div key={`${item.id}-container`}>
+                    <div key={`${item.id}-container`} className={styles.generationGroup}>
+                        <div className={styles.generationGroupHeader}>
+                            <span className={styles.generationLabel}>{item.model}</span>
+                            {confirmingDeleteId === item.id ? (
+                                <div className={styles.deleteConfirm}>
+                                    <span>Вы уверены?</span>
+                                    <button
+                                        className={styles.deleteConfirmYes}
+                                        onClick={() => handleDeleteConfirm(item.id)}
+                                        disabled={deleteMusicMutation.isPending}
+                                    >
+                                        Да
+                                    </button>
+                                    <button
+                                        className={styles.deleteConfirmNo}
+                                        onClick={handleDeleteCancel}
+                                        disabled={deleteMusicMutation.isPending}
+                                    >
+                                        Нет
+                                    </button>
+                                </div>
+                            ) : (
+                                <button
+                                    className={styles.deleteButton}
+                                    onClick={() => handleDeleteClick(item.id)}
+                                    aria-label="Удалить генерацию"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <polyline points="3 6 5 6 21 6" />
+                                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                                        <path d="M10 11v6M14 11v6" />
+                                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
                         <MusicItem key={`${item.id}-song1`} musicItem={{
-                            id: item.id, 
-                            status: item.status, 
-                            title: item.title, 
-                            created_at: item.created_at, 
-                            updated_at: item.updated_at, 
-                            song_url: item.song_1_url, 
+                            id: item.id,
+                            status: item.status,
+                            title: item.title,
+                            created_at: item.created_at,
+                            updated_at: item.updated_at,
+                            song_url: item.song_1_url,
                             song_stream_url: item.song_1_stream_url,
                             song_id: item.song_1_id,
                             song_image_url: item.song_1_image_url,
@@ -468,12 +520,12 @@ const MusicPage = () => {
                             error_message: item.error_message
                         }}/>
                         <MusicItem key={`${item.id}-song2`} musicItem={{
-                            id: item.id, 
-                            status: item.status, 
-                            title: item.title, 
-                            created_at: item.created_at, 
-                            updated_at: item.updated_at, 
-                            song_url: item.song_2_url, 
+                            id: item.id,
+                            status: item.status,
+                            title: item.title,
+                            created_at: item.created_at,
+                            updated_at: item.updated_at,
+                            song_url: item.song_2_url,
                             song_stream_url: item.song_2_stream_url,
                             song_id: item.song_2_id,
                             song_image_url: item.song_2_image_url,

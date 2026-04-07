@@ -514,6 +514,94 @@
     padding: 1rem 0;
 }
 
+.generationGroup {
+    margin-bottom: 1.25rem;
+}
+
+.generationGroupHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.25rem 0.4rem;
+}
+
+.generationLabel {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    letter-spacing: 0.03em;
+}
+
+.deleteButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.35);
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+
+    svg {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    &:hover {
+        color: rgba(220, 80, 80, 0.85);
+        background: rgba(220, 80, 80, 0.1);
+    }
+}
+
+.deleteConfirm {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    span {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+}
+
+.deleteConfirmYes,
+.deleteConfirmNo {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.deleteConfirmYes {
+    background: rgba(220, 80, 80, 0.8);
+    color: #fff;
+
+    &:hover:not(:disabled) {
+        background: rgba(220, 80, 80, 1);
+    }
+}
+
+.deleteConfirmNo {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+
+    &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.2);
+    }
+}
+
 .submitButton {
     padding: 0.7rem 2.5rem;
     background: #3a3a2a;
