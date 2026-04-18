@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useProject, useSelectSong, useRegenerateTrack, getProjectExportUrl } from '../../api/fetchProjects';
 import { apiClient } from '../../config/api';
-import type { IProjectTrack, IMusicGeneration } from '../../types';
+import type { IProjectTrack } from '../../types';
 import styles from './ProjectResultPage.module.scss';
 
 // ─── Track Player ─────────────────────────────────────────────────────────────

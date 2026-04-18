@@ -12,7 +12,6 @@ export const useProjects = () =>
       // Handle both paginated and plain list responses
       return Array.isArray(data) ? data : data.results;
     },
-    staleTime: 30 * 1000,
   });
 
 export const useProject = (id: number | string | undefined) =>
@@ -93,7 +92,7 @@ export const useSelectSong = (projectId: number | string) => {
 export const useGenerateProject = (projectId: number | string) => {
   const qc = useQueryClient();
   return useMutation({
-    mutationFn: async (force = false) => {
+    mutationFn: async (force?: boolean) => {
       const { data } = await apiClient.post(`/projects/${projectId}/generate/`, force ? { force: true } : {});
       return data;
     },
