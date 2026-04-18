@@ -470,13 +470,13 @@ export default function ProjectDetailPage() {
       setShowRegenModal(true);
       return;
     }
-    await generateProject.mutateAsync();
+    await generateProject.mutateAsync(undefined);
   };
 
   const handleRegenConfirm = async () => {
     setShowRegenModal(false);
     if (selectedTrackIds.size === localTracks.length) {
-      await generateProject.mutateAsync();
+      await generateProject.mutateAsync(undefined);
     } else {
       for (const trackId of selectedTrackIds) {
         await regenerateTrack.mutateAsync(trackId);
