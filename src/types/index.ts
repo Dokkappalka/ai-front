@@ -114,3 +114,54 @@ export interface IMessage {
   updated_at: string;
   attachments?: IAttachment[];
 }
+
+export interface IProjectChatMessage {
+  id: number;
+  project: number;
+  role: 'user' | 'assistant';
+  content: string;
+  created_at: string;
+}
+
+export interface IProjectTrack {
+  id: number;
+  project: number;
+  order: number;
+  title: string | null;
+  suno_prompt: string | null;
+  suno_style: string | null;
+  suno_model: string;
+  suno_instrumental: boolean;
+  suno_negative_tags: string | null;
+  music_generation: number | null;
+  music_generation_data: IMusicGeneration | null;
+  selected_song: 1 | 2 | null;
+  status: 'pending' | 'generating' | 'completed' | 'failed';
+}
+
+export interface IProject {
+  id: number;
+  user: number;
+  title: string;
+  type: 'single' | 'album';
+  track_count: number;
+  concept: string | null;
+  status: 'draft' | 'generating' | 'completed' | 'failed';
+  tracks: IProjectTrack[];
+  chat_messages: IProjectChatMessage[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IProjectListItem {
+  id: number;
+  title: string;
+  type: 'single' | 'album';
+  track_count: number;
+  track_count_completed: number;
+  track_count_with_audio: number;
+  concept: string | null;
+  status: 'draft' | 'generating' | 'completed' | 'failed';
+  created_at: string;
+  updated_at: string;
+}

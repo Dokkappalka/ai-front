@@ -5,6 +5,9 @@ import Layout from '../components/Layout/Layout';
 import MusicPage from '../pages/MusicPage/MusicPage.tsx';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import ChatPage from '../pages/ChatPage/ChatPage';
+import ProjectsPage from '../pages/ProjectsPage/ProjectsPage';
+import ProjectDetailPage from '../pages/ProjectDetailPage/ProjectDetailPage';
+import ProjectResultPage from '../pages/ProjectResultPage/ProjectResultPage';
 import { ProtectedRoute } from '../components/auth/ProtectedRoute';
 import { PublicRoute } from '../components/auth/PublicRoute';
 
@@ -42,7 +45,19 @@ export const router = createBrowserRouter([
       {
         path: 'chat/:id',
         element: <ChatPage/>
-      }
+      },
+      {
+        path: 'projects',
+        element: <ProjectsPage/>
+      },
+      {
+        path: 'projects/:id',
+        element: <ProjectDetailPage/>
+      },
+      {
+        path: 'projects/:id/result',
+        element: <ProjectResultPage/>
+      },
     ],
   },
 ]);

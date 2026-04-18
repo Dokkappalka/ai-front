@@ -51,6 +51,9 @@ const Header = () => {
           <button className={styles.button} onClick={() => {
             navigate('/music')
           }}>Музыка</button>
+          <button className={styles.button} onClick={() => {
+            navigate('/projects')
+          }}>Проекты</button>
         </div>
         <div className={styles.userContainer} ref={menuRef}>
           <div className={styles.userPill}>
@@ -74,6 +77,12 @@ const Header = () => {
               onClick={() => { navigate('/music'); setIsMenuOpen(false); }}
             >
               Музыка
+            </button>
+            <button
+              className={`${styles.menuItem} ${styles.navItemMobile}`}
+              onClick={() => { navigate('/projects'); setIsMenuOpen(false); }}
+            >
+              Проекты
             </button>
             <button
               className={styles.menuItem}
