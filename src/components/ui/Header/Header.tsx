@@ -5,7 +5,7 @@ import { useMe } from '../../../api/fetchMe';
 import MenuIcon from '../../../assets/icons/menu.svg?react';
 import { fetchLogout } from '../../../api/fetchLogout';
 
-const Header = () => {
+const Header = () => { //)))
   const navigate = useNavigate();
   const { data: me } = useMe();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
