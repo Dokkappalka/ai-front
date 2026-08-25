@@ -59,7 +59,7 @@ jobs:
 
       - name: Copy nginx.conf to server
         run: |
-          scp -i ~/.ssh/deploy_key nginx.conf ${{ secrets.SERVER_USER }}@213.176.116.131:/opt/ai-hype/nginx.conf
+          scp -i ~/.ssh/deploy_key nginx.conf ${{ secrets.SERVER_USER }}@213.176.116.131:/opt/ai-hype/frontend/ai-hype/nginx.conf
 
       - name: Restart nginx
         run: |
