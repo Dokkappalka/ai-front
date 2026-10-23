@@ -15,11 +15,13 @@ function ChatPanel({
   messages,
   streamingContent,
   isStreaming,
+  error,
   onSend,
 }: {
   messages: IProjectChatMessage[];
   streamingContent: string;
   isStreaming: boolean;
+  error?: string;
   onSend: (text: string) => void;
 }) {
   const [input, setInput] = useState('');
@@ -90,6 +92,13 @@ function ChatPanel({
               <span className={styles.typingDots}>
                 <span /><span /><span />
               </span>
+            </div>
+          </div>
+        )}
+        {!isStreaming && error && (
+          <div className={`${styles.chatMsg} ${styles.chatMsgAssistant}`}>
+            <div className={`${styles.chatMsgBubble} ${styles.chatError}`}>
+              ⚠️ {error}
             </div>
           </div>
         )}
@@ -339,6 +348,7 @@ export default function ProjectDetailPage() {
   const [messages, setMessages] = useState<IProjectChatMessage[]>([]);
   const [streamingContent, setStreamingContent] = useState('');
   const [isStreaming, setIsStreaming] = useState(false);
+  const [chatError, setChatError] = useState('');
   const [readyToGenerate, setReadyToGenerate] = useState(false);
   const [mobileParamsOpen, setMobileParamsOpen] = useState(false);
   const [showRegenModal, setShowRegenModal] = useState(false);
@@ -375,6 +385,7 @@ export default function ProjectDetailPage() {
     const unsub = projectSocket.subscribe((msg) => {
       if (msg.type === 'chat_chunk') {
         setIsStreaming(true);
+        setChatError('');
         setStreamingContent((prev) => {
           const next = prev + msg.content;
           // Hide JSON block while streaming — strip from the marker onward
@@ -419,6 +430,7 @@ export default function ProjectDetailPage() {
       } else if (msg.type === 'error') {
         setIsStreaming(false);
         setStreamingContent('');
+        setChatError(msg.message || 'Ошибка AI-сервиса');
       }
     });
 
@@ -440,6 +452,7 @@ export default function ProjectDetailPage() {
     setMessages((prev) => [...prev, optimistic]);
     setIsStreaming(true);
     setStreamingContent('');
+    setChatError('');
     projectSocket.send(text);
   }, [id]);
 
@@ -545,6 +558,7 @@ export default function ProjectDetailPage() {
           messages={messages}
           streamingContent={streamingContent}
           isStreaming={isStreaming}
+          error={chatError}
           onSend={handleSend}
         />
         <ParamsPanel

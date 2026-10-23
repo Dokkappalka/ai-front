@@ -207,6 +207,16 @@
   animation: blink 0.7s steps(1) infinite;
 }
 
+// Error bubble shown when the AI producer fails (bad model, provider down, etc.)
+.chatError {
+  background: rgba(239, 68, 68, 0.14) !important;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  color: #fca5a5 !important;
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
